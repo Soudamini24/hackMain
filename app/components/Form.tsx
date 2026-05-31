@@ -16,17 +16,34 @@ interface FormProps {
 }
 
 export default function TripForm({ onSubmit }: FormProps) {
+  const [fromLocation, setFromLocation] = useState("");
   const [destination, setDestination] = useState("");
-  const [budget, setBudget] = useState("");
   const [days, setDays] = useState("");
   const [travelType, setTravelType] = useState("Family");
+
+  const calculateBudget = () => {
+    // Dummy calculation for now
+    // Later replace with actual distance API
+    const estimatedDistance = 500; // km
+
+    const travelCostPerKm = 5;
+    const hotelCostPerDay = 2000;
+
+    return (
+      estimatedDistance * travelCostPerKm +
+      Number(days) * hotelCostPerDay
+    );
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const budget = calculateBudget();
+
     onSubmit({
+      fromLocation,
       destination,
-      budget: Number(budget),
+      budget,
       days: Number(days),
       travelType,
     });
@@ -42,17 +59,16 @@ export default function TripForm({ onSubmit }: FormProps) {
         <form onSubmit={handleSubmit}>
           <Stack spacing={2}>
             <TextField
-              label="Destination"
-              value={destination}
-              onChange={(e) => setDestination(e.target.value)}
+              label="From"
+              value={fromLocation}
+              onChange={(e) => setFromLocation(e.target.value)}
               fullWidth
             />
 
             <TextField
-              label="Budget"
-              type="number"
-              value={budget}
-              onChange={(e) => setBudget(e.target.value)}
+              label="Destination"
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
               fullWidth
             />
 
