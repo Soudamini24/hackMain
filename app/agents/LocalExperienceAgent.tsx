@@ -1,23 +1,66 @@
-import React from 'react';
-import { Card, CardContent, Typography, List, ListItem, ListItemText, Divider } from '@mui/material';
+import React from "react";
+import {
+  Card,
+  CardContent,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+} from "@mui/material";
 
-export function LocalExperienceAgent({ attractions, restaurants }: { attractions: string[]; restaurants: string[] }) {
+interface LocalExperienceAgentProps {
+  attractions: string[];
+  restaurants: string[];
+}
+
+export function LocalExperienceAgent({
+  attractions,
+  restaurants,
+}: LocalExperienceAgentProps) {
   return (
     <Card sx={{ mb: 3 }}>
       <CardContent>
-        <Typography variant="h5" gutterBottom>Local Experiences</Typography>
-        <Typography variant="subtitle1">Beaches & Attractions</Typography>
+        <Typography variant="h5" gutterBottom>
+          Local Experience Agent
+        </Typography>
+
+        <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+          Attractions & Places to Visit
+        </Typography>
+
         <List>
-          {attractions.map((a, i) => (
-            <ListItem key={i}><ListItemText primary={a} /></ListItem>
-          ))}
+          {attractions.length > 0 ? (
+            attractions.map((attraction, index) => (
+              <ListItem key={index}>
+                <ListItemText primary={attraction} />
+              </ListItem>
+            ))
+          ) : (
+            <ListItem>
+              <ListItemText primary="No attractions found" />
+            </ListItem>
+          )}
         </List>
+
         <Divider sx={{ my: 2 }} />
-        <Typography variant="subtitle1">Vegetarian Restaurants</Typography>
+
+        <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+          Recommended Restaurants
+        </Typography>
+
         <List>
-          {restaurants.map((r, i) => (
-            <ListItem key={i}><ListItemText primary={r} /></ListItem>
-          ))}
+          {restaurants.length > 0 ? (
+            restaurants.map((restaurant, index) => (
+              <ListItem key={index}>
+                <ListItemText primary={restaurant} />
+              </ListItem>
+            ))
+          ) : (
+            <ListItem>
+              <ListItemText primary="No restaurants found" />
+            </ListItem>
+          )}
         </List>
       </CardContent>
     </Card>

@@ -5,7 +5,7 @@ export function ItineraryAgent({ itinerary }: { itinerary: string[] }) {
   return (
     <Card sx={{ mb: 3 }}>
       <CardContent>
-        <Typography variant="h5" gutterBottom>4-Day Goa Itinerary</Typography>
+        <Typography variant="h5" gutterBottom>Entire Trip Plan</Typography>
         <List>
           {itinerary.map((day, i) => (
             <ListItem key={i}><ListItemText primary={day} /></ListItem>
